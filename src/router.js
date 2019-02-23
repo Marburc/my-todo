@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Register from "./components/Register.vue";
 import ToDoList from "./components/ToDoList";
 import LogIn from './components/LogIn.vue';
+import Home from './components/Home.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -24,6 +25,12 @@ export default new Router({
             path: "/login",
             name: "login",
             component: LogIn
+
+        },
+        {
+            path: "/",
+            name: "home",
+            component: Home
 
         },
     ]
