@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -52,7 +53,10 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      alert(JSON.stringify(this.form));
+      axios
+        .post("https://testprojekt-14901.firebaseio.com/users.json", this.form)
+        .then(res => console.log(res))
+        .catch(error => console.log(error));
     },
     onReset(evt) {
       evt.preventDefault();
