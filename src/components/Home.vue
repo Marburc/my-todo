@@ -1,5 +1,5 @@
 <template>
   <div>
-    <slot></slot>
+    <slot>Ein Change Test</slot>
   </div>
 </template>
