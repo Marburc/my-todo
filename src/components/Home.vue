@@ -41,7 +41,7 @@ export default {
   methods: {
     createNew(toDo) {
       db.collection("todos").add({
-        titel: toDo
+        title: toDo
       });
     },
     deleteToDo(index) {
