@@ -2,11 +2,11 @@
   <div class="row">
     <div class="col">
       <ul class="list-group">
-        <app-toDoItem v-for="(toDo, index) in toDos" :key="index">
+        <app-toDoItem v-for="(toDo, index) in toDos" :key="toDo.id">
           {{toDo.title}}
           <div class="icons">
             <i @click="finishToDo(index)" class="far fa-check-circle"></i>
-            <i @click="deleteToDo(index)" class="far fa-trash-alt delete"></i>
+            <i @click="deleteToDo(toDo.id)" class="far fa-trash-alt delete"></i>
           </div>
         </app-toDoItem>
       </ul>

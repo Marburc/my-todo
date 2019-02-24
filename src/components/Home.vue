@@ -35,6 +35,7 @@ export default {
             title: doc.data().title
           };
           this.toDos.push(data);
+          console.log(this.toDos);
         });
       });
   },
@@ -44,8 +45,10 @@ export default {
         title: toDo
       });
     },
-    deleteToDo(index) {
-      this.toDos.splice(index, 1);
+    deleteToDo(id) {
+      db.collection("todos")
+        .doc(id)
+        .delete();
     },
     deleteFinished(index) {
       this.finished.splice(index, 1);
