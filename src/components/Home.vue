@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import db from "./firebaseInit.js";
 import NewToDo from "./NewToDo.vue";
 import ToDoList from "./ToDoList.vue";
 import FinishedToDos from "./FinishedToDos.vue";
@@ -23,6 +24,19 @@ export default {
     "app-newToDo": NewToDo,
     "app-toDoList": ToDoList,
     "app-finishedToDo": FinishedToDos
+  },
+  created() {
+    db.collection("todos")
+      .get()
+      .then(snapshot => {
+        snapshot.docs.forEach(doc => {
+          const data = {
+            id: doc.id,
+            title: doc.data().title
+          };
+          this.toDos.push(data);
+        });
+      });
   },
   methods: {
     createNew(toDo) {

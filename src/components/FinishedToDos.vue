@@ -9,7 +9,7 @@
       <div class="col">
         <ul class="list-group">
           <li v-for=" (item,index) in finished " :key="index" class="list-group-item mb-1">
-            {{item}}
+            {{item.title}}
             <i @click="deleteFinished(index)" class="far fa-trash-alt delete-icon"></i>
           </li>
         </ul>

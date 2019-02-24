@@ -3,7 +3,7 @@
     <div class="col">
       <ul class="list-group">
         <app-toDoItem v-for="(toDo, index) in toDos" :key="index">
-          {{toDo}}
+          {{toDo.title}}
           <div class="icons">
             <i @click="finishToDo(index)" class="far fa-check-circle"></i>
             <i @click="deleteToDo(index)" class="far fa-trash-alt delete"></i>
