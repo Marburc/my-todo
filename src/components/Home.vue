@@ -26,18 +26,19 @@ export default {
     "app-finishedToDo": FinishedToDos
   },
   created() {
-    db.collection("todos")
-      .get()
-      .then(snapshot => {
-        snapshot.docs.forEach(doc => {
+    db.collection("todos").onSnapshot(snapshot => {
+      let changes = snapshot.docChanges();
+      changes.forEach(change => {
+        if (change.type == "added") {
           const data = {
-            id: doc.id,
-            title: doc.data().title
+            id: change.doc.id,
+            title: change.doc.data().title
           };
           this.toDos.push(data);
           console.log(this.toDos);
-        });
+        }
       });
+    });
   },
   methods: {
     createNew(toDo) {
