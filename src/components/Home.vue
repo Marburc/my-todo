@@ -40,11 +40,9 @@ export default {
   },
   methods: {
     createNew(toDo) {
-      if (toDo == "") {
-        return;
-      } else {
-        this.toDos.push(toDo);
-      }
+      db.collection("todos").add({
+        titel: toDo
+      });
     },
     deleteToDo(index) {
       this.toDos.splice(index, 1);
