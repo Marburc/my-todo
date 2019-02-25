@@ -3,7 +3,8 @@
     <div class="container">
       <app-newToDo @newItem="createNew"></app-newToDo>
       <app-toDoList :toDos="toDos" @deleteToDo="deleteToDo" @checkToDo="finishToDo"></app-toDoList>
-      <app-finishedToDo :toDos="toDos" @deleteFinished="deleteFinished"></app-finishedToDo>
+      <app-finishedToDo :toDos="toDos" @deleteFinished="deleteFinished"
+      @checkToDo="finishToDo"></app-finishedToDo>
     </div>
   </div>
 </template>
