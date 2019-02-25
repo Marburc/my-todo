@@ -4,6 +4,8 @@ import Register from "./components/Register.vue";
 import ToDoList from "./components/ToDoList";
 import LogIn from './components/LogIn.vue';
 import Home from './components/Home.vue';
+import firebase from 'firebase';
+
 Vue.use(Router);
 
 export default new Router({
@@ -24,14 +26,22 @@ export default new Router({
         {
             path: "/login",
             name: "login",
-            component: LogIn
+            component: LogIn,
+            meta: {
+                requiresGuest: true,
+            }
 
         },
         {
             path: "/",
             name: "home",
-            component: Home
+            component: Home,
+            meta: {
+                requiresAuth: true,
+            }
 
         },
     ]
 });
+
+

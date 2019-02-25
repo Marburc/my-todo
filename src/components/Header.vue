@@ -10,12 +10,30 @@
           <b-nav-item to="/" href="#">Home</b-nav-item>
           <b-nav-item to="/register" href="#">Register</b-nav-item>
           <b-nav-item to="/login" href="#">Log in</b-nav-item>
+            <b-button size="sm" class="my-2 my-sm-0" @click="logout">Logout</b-button>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
   </div>
 </template>
 <script>
-export default {};
+import firebase from 'firebase'
+export default {
+  name: 'navbar',
+  data(){
+    return{
+      isLoggedIn: false,
+      currentUser: false
+    }
+  },
+  methods: {
+    logout: function() {
+      firebase.auth().signOut()
+      .then(() => {
+        this.$router.push('/login');
+      })
+    }
+  }
+};
 </script>
 
