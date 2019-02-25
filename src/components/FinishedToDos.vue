@@ -24,7 +24,7 @@
 export default {
   data: function (){
     return {
-      showFinished: true
+      showFinished: false
     }
   },
   props: ["toDos"],

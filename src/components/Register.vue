@@ -1,6 +1,6 @@
 <template>
   <div class="pt-5">
-    
+    <h3>Registrieren</h3>
     <b-form @submit="onSubmit" v-if="show">
       <b-form-group id="exampleInputGroup1" label="Email:" label-for="exampleInput1">
         <b-form-input
@@ -54,7 +54,7 @@ export default {
     onSubmit(evt) {
      firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
         user => {
-        this.$router.push('/');
+         this.$router.go({path: this.$router.path});
         
       },
       err => {

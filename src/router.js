@@ -5,10 +5,11 @@ import ToDoList from "./components/ToDoList";
 import LogIn from './components/LogIn.vue';
 import Home from './components/Home.vue';
 import firebase from 'firebase';
+import { nextTick } from "q";
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
@@ -27,9 +28,9 @@ export default new Router({
             path: "/login",
             name: "login",
             component: LogIn,
-            meta: {
-                requiresGuest: true,
-            }
+            // meta: {
+            //     requiresGuest: true,
+            // }
 
         },
         {
@@ -44,4 +45,38 @@ export default new Router({
     ]
 });
 
+router.beforeEach((to, from, next) => {
+    // Check for requiredAuth guard
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        // Check if NOT logged in
+        if (!firebase.auth().currentUser) {
+            //Go to login
+            next({
+                path: '/login',
+                query: {
+                    redirect: to.fullPath
+                }
+            });
+        } else {
+            // Proceed to route
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.requiresGuest)) {
+        // Check if  logged in
+        if (firebase.auth().currentUser) {
+            //Go to login
+            next({
+                path: '/',
+                query: {
+                    redirect: to.fullPath
+                }
+            });
+        }
+    } else {
+        // Proceed to route
+        next();
+    }
+});
+
+export default router;
 

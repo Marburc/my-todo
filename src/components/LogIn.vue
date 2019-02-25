@@ -1,6 +1,6 @@
 <template>
   <div class="pt-5">
-    
+    <h3>Log In </h3>
     <b-form @submit="login" v-if="show">
       <b-form-group id="exampleInputGroup1" label="Email:" label-for="exampleInput1">
         <b-form-input
@@ -46,8 +46,8 @@ export default {
     login(evt) {
      firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
         user => {
-          alert(`Du bist erfolgreich eingeloggt als ${email} `)
-        this.$router.push('/');
+          alert(`Du bist erfolgreich eingeloggt als ${this.email}`)
+        this.$router.go({path: this.$router.path});
         
       },
       err => {
