@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col">
       <ul class="list-group">
-        <app-toDoItem v-for="(toDo, index) in toDos" :key="toDo.id">
+        <app-toDoItem v-if="toDo.completed === true" v-for="(toDo) in toDos" :key="toDo.id">
           {{toDo.title}}
           <div class="icons">
-            <i @click="finishToDo(index)" class="far fa-check-circle"></i>
+            <i @click="finishToDo(toDo)" class="far fa-check-circle"></i>
             <i @click="deleteToDo(toDo.id)" class="far fa-trash-alt delete"></i>
           </div>
         </app-toDoItem>

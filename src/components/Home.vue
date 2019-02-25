@@ -33,7 +33,8 @@ export default {
           const data = {
             id: change.doc.id,
             title: change.doc.data().title,
-            timestamp: change.doc.data().timestamp
+            timestamp: change.doc.data().timestamp,
+            completed: change.doc.data().completed
           };
           this.toDos.push(data);
         } else if (change.type == "removed") {
@@ -54,7 +55,8 @@ export default {
     createNew(toDo) {
       db.collection("todos").add({
         title: toDo,
-        timestamp: new Date()
+        timestamp: new Date(),
+        completed: false
       });
     },
     deleteToDo(id) {
@@ -65,10 +67,13 @@ export default {
     deleteFinished(index) {
       this.finished.splice(index, 1);
     },
-    finishToDo(index) {
-      let done = this.toDos.splice(index, 1);
-      let str = done[0];
-      this.finished.push(str);
+    finishToDo(todo) {
+      todo.completed = !todo.completed;
+      db.collection("todos")
+        .doc(todo.id)
+        .update({
+          completed: !todo.completed
+        });
     }
   }
 };
