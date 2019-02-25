@@ -4,7 +4,8 @@
       <app-newToDo @newItem="createNew"></app-newToDo>
       <app-toDoList :toDos="toDos" @deleteToDo="deleteToDo" @checkToDo="finishToDo"></app-toDoList>
       <app-finishedToDo :toDos="toDos" @deleteFinished="deleteFinished"
-      @checkToDo="finishToDo"></app-finishedToDo>
+      @checkToDo="finishToDo"
+      @deleteToDo="deleteToDo"></app-finishedToDo>
     </div>
   </div>
 </template>
