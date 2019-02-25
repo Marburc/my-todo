@@ -32,10 +32,20 @@ export default {
         if (change.type == "added") {
           const data = {
             id: change.doc.id,
-            title: change.doc.data().title
+            title: change.doc.data().title,
+            timestamp: change.doc.data().timestamp
           };
           this.toDos.push(data);
-          console.log(this.toDos);
+        } else if (change.type == "removed") {
+          var listToDelete = [change.doc.id];
+          for (var i = 0; i < this.toDos.length; i++) {
+            var obj = this.toDos[i];
+
+            if (listToDelete.indexOf(obj.id) !== -1) {
+              this.toDos.splice(i, 1);
+              i--;
+            }
+          }
         }
       });
     });
@@ -43,7 +53,8 @@ export default {
   methods: {
     createNew(toDo) {
       db.collection("todos").add({
-        title: toDo
+        title: toDo,
+        timestamp: new Date()
       });
     },
     deleteToDo(id) {
