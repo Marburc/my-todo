@@ -1,7 +1,7 @@
 <template>
   <div class="m-5">
     <div class="d-flex justify-content-center align-items-center">
-      <h4 class="text-center">{{toDos.length}} erledigte Einträge</h4>
+      <h4 class="text-center">{{toDos.filter(function(x){return x.completed==true}).length}} erledigte Einträge</h4>
       <i @click="showFinished = !showFinished" class="far fa-eye show-finished-icon"></i>
     </div>
 
