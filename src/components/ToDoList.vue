@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col">
       <ul class="list-group">
-        <app-toDoItem v-if="toDo.completed === true" v-for="(toDo) in toDos" :key="toDo.id">
+        <app-toDoItem v-if="toDo.completed === false" v-for="(toDo) in toDos" :key="toDo.id">
           {{toDo.title}}
           <div class="icons">
-            <i @click="finishToDo(toDo)" class="far fa-check-circle"></i>
+            <i @click="checkToDo(toDo)" class="far fa-check-circle"></i>
             <i @click="deleteToDo(toDo.id)" class="far fa-trash-alt delete"></i>
           </div>
         </app-toDoItem>
@@ -25,8 +25,8 @@ export default {
     deleteToDo(index) {
       this.$emit("deleteToDo", index);
     },
-    finishToDo(index) {
-      this.$emit("finishToDo", index);
+    checkToDo(index) {
+      this.$emit("checkToDo", index);
     }
   }
 };

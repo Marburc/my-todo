@@ -2,8 +2,8 @@
   <div id="app">
     <div class="container">
       <app-newToDo @newItem="createNew"></app-newToDo>
-      <app-toDoList :toDos="toDos" @deleteToDo="deleteToDo" @finishToDo="finishToDo"></app-toDoList>
-      <app-finishedToDo :finished="finished" @deleteFinished="deleteFinished"></app-finishedToDo>
+      <app-toDoList :toDos="toDos" @deleteToDo="deleteToDo" @checkToDo="finishToDo"></app-toDoList>
+      <app-finishedToDo :toDos="toDos" @deleteFinished="deleteFinished"></app-finishedToDo>
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   data: function() {
     return {
       toDos: [],
-      finished: []
+     
     };
   },
   components: {
@@ -65,14 +65,14 @@ export default {
         .delete();
     },
     deleteFinished(index) {
-      this.finished.splice(index, 1);
+      this.toDos.splice(index, 1);
     },
     finishToDo(todo) {
       todo.completed = !todo.completed;
       db.collection("todos")
         .doc(todo.id)
         .update({
-          completed: !todo.completed
+          completed: todo.completed
         });
     }
   }
