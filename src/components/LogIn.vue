@@ -1,6 +1,6 @@
 <template>
   <div class="pt-5">
-    <h3>Log In </h3>
+    <h3>Log In</h3>
     <b-form @submit="login" v-if="show">
       <b-form-group id="exampleInputGroup1" label="Email:" label-for="exampleInput1">
         <b-form-input
@@ -11,8 +11,6 @@
           placeholder=" email"
         />
       </b-form-group>
-
-    
 
       <b-form-group id="exampleInputGroup2" label="Passwort:" label-for="exampleInput2">
         <b-form-input
@@ -26,40 +24,37 @@
 
       <b-button @click="login" type="submit" variant="primary">Bestätigen</b-button>
     </b-form>
-    
   </div>
-  
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from "firebase";
 export default {
-  data () {
+  data() {
     return {
-      
-        email: "",
-        password: "",
+      email: "",
+      password: "",
       show: true
     };
   },
   methods: {
     login(evt) {
-     firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
-        user => {
-          alert(`Du bist erfolgreich eingeloggt als ${this.email}`)
-        this.$router.go({path: this.$router.path});
-        
-      },
-      err => {
-        alert(err.message)
-      }
-      )
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(
+          user => {
+            alert(`Du bist erfolgreich eingeloggt als ${this.email}`);
+            this.$router.push({ name: "home" });
+          },
+          err => {
+            alert(err.message);
+          }
+        );
       evt.preventDefault();
-      
-    },
-   }
+    }
   }
-
+};
 </script>
 
 

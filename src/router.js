@@ -5,7 +5,7 @@ import ToDoList from "./components/ToDoList";
 import LogIn from './components/LogIn.vue';
 import Home from './components/Home.vue';
 import firebase from 'firebase';
-import { nextTick } from "q";
+
 
 Vue.use(Router);
 
@@ -28,9 +28,6 @@ let router = new Router({
             path: "/login",
             name: "login",
             component: LogIn,
-            // meta: {
-            //     requiresGuest: true,
-            // }
 
         },
         {
